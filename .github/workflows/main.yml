@@ -6,13 +6,23 @@ jobs:
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8]
-        skfem-version: [2.2.0, 2.2.1]
+        skfem-version: [2.2.0, 2.2.1, 2.1.1]
     steps:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install scikit-fem
+    - name: Install scikit-fem ${{ matrix.skfem-version }}
       run: |
         python -m pip install --upgrade pip
         pip install scikit-fem==${{ matrix.skfem-version }}
+    - name: Clone tests
+      run: |
+        git clone --depth 1 --branch ${{ matrix.skfem-version }} https://github.com/kinnala/scikit-fem.git
+        rm -r scikit-fem/skfem
+    - name: Install test dependencies
+      run: |
+        pip install -r scikit-fem/requirements.txt
+    - name: Run tests
+      run: |
+        cd scikit-fem && pytest
