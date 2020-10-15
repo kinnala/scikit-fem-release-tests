@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8]
-        skfem-version: [2.2.1]
+        skfem-version: [2.2.2]
         os: [ubuntu-latest, macos-latest]
     steps:
     - name: Set up Python ${{ matrix.python-version }}
