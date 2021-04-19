@@ -28,4 +28,4 @@ jobs:
         pip install -r scikit-fem/requirements.txt
     - name: Run tests
       run: |
-        cd scikit-fem && pytest -k 'not TestEx32 and not TestEx28'
+        cd scikit-fem && pytest -k 'not TestEx32 and not TestEx28 and not TestEx09'
